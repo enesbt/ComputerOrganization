@@ -29,39 +29,31 @@ Commands::Commands()
 }
 
 
-string Commands::CommandDecoder(bitset<8> opcode)
+string Commands::AddressModeDecoder(bitset<8>opcode)
 {
-    
-    std::bitset<2> addrMode(opcode.to_ulong() >> 6); // Sağdan 6 bit kaydırma
-    std::cout << "addrMode: " << addrMode << std::endl; // Ekrana: 10
-
-    // Son 6 biti almak için
-    std::bitset<6> command(opcode.to_ulong() & 0x3F); // Son 6 biti almak için bit maskesi
-    std::cout << "command: " << command << std::endl; // Ekrana: 101
-
-
+    bitset<2> addrMode(opcode.to_ulong() >> 6); 
+    cout << "addrMode: " << addrMode << endl;
     auto it = addressmodes.find(addrMode);
-    auto it2 = commands.find(command);
-
     string addrModeString = "";
-    string commandString = "";
-
     if (it != addressmodes.end()) {
        addrModeString = it->second;
     } else {
         cout << "AdressModu Bulunamadi " <<endl;
     }
-    if (it2 != commands.end()) {
-       commandString = it2->second;
+    return addrModeString;
+}
+string Commands::CommandDecoder(bitset<8> opcode)
+{
+    bitset<6> command(opcode.to_ulong() & 0x3F);
+    cout << "command: " << command << endl; 
+    auto it = commands.find(command);
+    string commandString = "";
+    if (it != commands.end()) {
+       commandString = it->second;
     } else {
         cout << "Command Bulunamadi " <<endl;
     }
-
-    //cout<<"Adres Modu: "<<addrModeString<<endl;
-    //cout<<"Command: "<<commandString<<endl;
-    string result = commandString+"."+addrModeString;
-    return result;
-
+    return commandString;
 }
 
 Commands::~Commands()

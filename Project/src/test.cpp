@@ -3,42 +3,84 @@
 #include <bitset>
 #include "Registers.hpp"
 #include "Commands.hpp"
+#include "Alu.hpp"
+#include "CommandCycle.hpp"
+
 using namespace std;
 
+// Komutlarin exe safhalari yazilacak
+// Kontrol Paneli olusturulacak.
 
 int main()
 {
 
-    File* f = new File("C:/Users/Enes/Desktop/BO/Project/data/data.txt");
+    File* f = new File("C:/Users/Enes/Desktop/ComputerOrganization/Project/data/data.txt");
     Registers* r = new Registers();
 
 
 
     f->ReadFile();
     vector<uint8_t> x = f->getFile();
-    uint8_t  *pc = x.data();
-    //bitset<8> bitt = x[0];
-    cout<<"X.SIZE(): "<<x.size()<<endl;
-    
-    for(int i=0;i<x.size();++i)
-    {
-        cout << "Adres: " << static_cast<void*>(&x[i]) << endl; 
-        cout << "Deger (x[i]): " << bitset<8>(x[i]) << endl; 
-        cout << "Deger (pc): " << bitset<8>(*(pc + i)) << endl;
-        cout << "PC Adres: " << static_cast<void*>(pc) << std::endl;
-        pc = pc+1;
-        //cout<<"bit: "<<bitt<<endl;
-        //cout<<"gg: "<<gg<<endl;
-        
-    }
-    r->setAR(&x[0]);
-    
-    cout<<"r->getar(): "<<static_cast<void*>(r->getAR())<<endl;
 
-    cout<<"##################################\n";
+    //komutların baslangici PC registerine kaydedilir
+    // pc degeri adress registerine kaydedilir T0
+    // T1: adres registerindeki deger IR regiseteriene atanır pc degeri 1 artırlır
+
+    // uint8_t  *PC= r->getPC();
+    // PC = x.data();
+    r->setPC(x.data());
+    //OPCODE degeri IR registerine kaydedilir.
+    r->setIR(*r->getPC());
+    //cout<<"IR: "<<r->getIR()<<endl;
+
+
     Commands* c = new Commands();
-    string result = c->CommandDecoder(bitset<8>("11010001"));
-    cout<<"result: "<<result<<endl;
+    string mode = c->AddressModeDecoder(r->getIR());
+    string  com = c->CommandDecoder(r->getIR());
+    cout<<"mode: "<<mode<<endl;
+    cout<<"com: "<<com<<endl;
+
+    Alu* a = new Alu();
+    bitset<8> b1("00011010"); // İlk bitset
+    bitset<8> b2("00100101"); // İkinci bitset
+
+    bitset<8> sum = a->Add(b1, b2);
+
+    cout << "Sum: " << sum << std::endl;
+
+    CommmandCycle* cc = new CommmandCycle();
+    cc->Fetch(*r);
+    cc->Decode(*r);
+
+    auto it = cc->functionCommandMap.find("IVEDI.ADD");
+    if (it != cc->functionCommandMap.end()) {
+        it->second(*r,*a);  // Fonksiyonu çağırmak
+    } else {
+        std::cout << "Command not found." << endl;
+    }
+
+    //bitset<8> bitt = x[0];
+    // cout<<"X.SIZE(): "<<x.size()<<endl;
+    
+    // for(int i=0;i<x.size();++i)
+    // {
+    //     cout << "Adres: " << static_cast<void*>(&x[i]) << endl; 
+    //     cout << "Deger (x[i]): " << bitset<8>(x[i]) << endl; 
+    //     cout << "Deger (pc): " << bitset<8>(*(r->getPC() + i)) << endl;
+    //     cout << "PC Adres: " << static_cast<void*>(r->getPC()) << std::endl;
+    //     r->setPC(r->getPC()+1);
+    //     //cout<<"bit: "<<bitt<<endl;
+    //     //cout<<"gg: "<<gg<<endl;
+        
+    // }
+    // r->setAR(&x[0]);
+    
+    // cout<<"r->getar(): "<<static_cast<void*>(r->getAR())<<endl;
+
+    // cout<<"##################################\n";
+    // Commands* c = new Commands();
+    // string result = c->CommandDecoder(bitset<8>("11010001"));
+    // cout<<"result: "<<result<<endl;
     //cout<<bitset<8>("00000100")<<endl;
 
     // map<bitset<6>, string>::iterator it = c->commands.begin();

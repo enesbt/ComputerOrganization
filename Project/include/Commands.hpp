@@ -24,6 +24,7 @@ struct Commands
     public:
         Commands();
         ~Commands();
+        string AddressModeDecoder(bitset<8>);
         string CommandDecoder(bitset<8>);
 
 };
