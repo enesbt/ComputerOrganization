@@ -1,18 +1,56 @@
 #include "Registers.hpp"
+#include<bitset>
 
 Registers::Registers()
 {
     this->AR = nullptr;
     this->PC = nullptr;
     this->SP = nullptr;
-    this->TR = nullptr;
+    this->CCR = bitset<8>("00000001");
+    this->ACH = bitset<8>("00000000");
+    this->ACL = bitset<8>("00000000");
+
+
 }
 Registers::~Registers()
 {
     delete this->AR;
     delete this->PC;
     delete this->SP;
-    delete this->TR;
+}
+
+void Registers::setTRH1(bitset<8> TRH1)
+{
+    this->TRH1 = TRH1;
+}
+void Registers::setTRH2(bitset<8> TRH2)
+{
+    this->TRH2 = TRH2;
+}
+void Registers::setTRL1(bitset<8> TRL1)
+{
+    this->TRL1 = TRL1;
+}
+void Registers::setTRL2(bitset<8> TRL2)
+{
+    this->TRL2 = TRL2;
+}
+
+bitset<8> Registers::getTRH1()
+{
+    return this->TRH1;
+}
+bitset<8> Registers::getTRH2()
+{
+    return this->TRH2;
+}
+bitset<8> Registers::getTRL1()
+{   
+    return this->TRL1;
+}
+bitset<8> Registers::getTRL2()
+{
+    return this->TRL2;
 }
 
 
@@ -53,10 +91,8 @@ void Registers::setSP(uint8_t* SP)
 {
     this->SP = SP;
 }
-void Registers::setTR(uint8_t* TR)
-{
-    this->TR = TR;
-}
+
+
 uint8_t* Registers::getAR()
 {
     return this->AR;
@@ -94,8 +130,4 @@ bitset<8> Registers::getCCR()
 uint8_t* Registers::getSP()
 {
     return this->SP;
-}
-uint8_t* Registers::getTR()
-{
-    return this->TR;
 }

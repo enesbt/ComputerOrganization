@@ -16,8 +16,11 @@ struct Registers
         bitset<8> IR; //code register
         bitset<8> CCR; // durum code register
         uint8_t *SP; // stack pointer 
-        uint8_t *TR; // temporal register
-
+        //uint8_t *TR; // temporal register
+        bitset<8> TRH1;
+        bitset<8> TRH2;
+        bitset<8> TRL1;
+        bitset<8> TRL2;
 
     //get set kurucu yikici
     public:
@@ -31,7 +34,11 @@ struct Registers
         void setIR(bitset<8>);
         void setCCR(bitset<8>);
         void setSP(uint8_t*);
-        void setTR(uint8_t*);
+        void setTRH1(bitset<8>);
+        void setTRH2(bitset<8>);
+        void setTRL1(bitset<8>);
+        void setTRL2(bitset<8>);
+        
 
 
 
@@ -44,7 +51,10 @@ struct Registers
         bitset<8> getIR();
         bitset<8> getCCR();
         uint8_t* getSP();
-        uint8_t* getTR();
+        bitset<8> getTRH1();
+        bitset<8> getTRH2();
+        bitset<8> getTRL1();
+        bitset<8> getTRL2();
 
         ~Registers();
     

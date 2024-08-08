@@ -13,10 +13,15 @@ struct File
 {
     private:
         vector<uint8_t> file;
+        
         string fileName;
+        
 
     public:
+        int loc;
+        uint8_t* fileArray;
         void ReadFile();
+        void WriteFile(string);
     
         string getFileName();
         vector<uint8_t> getFile();

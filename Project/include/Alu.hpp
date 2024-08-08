@@ -2,10 +2,11 @@
 #define ALU_HPP
 #include <iostream>
 #include<bitset>
+#include "Registers.hpp"
 using namespace std;
 struct Alu
 {
-    bitset<8> Add(bitset<8>,bitset<8>);
+    void Add(Registers&);
     void Sub(bitset<8>,bitset<8>);
     void Mul(bitset<8>,bitset<8>);
     void Div(bitset<8>,bitset<8>);

@@ -5,6 +5,9 @@
 #include <functional>
 #include "Registers.hpp"
 #include "Alu.hpp"
+#include <sstream>
+#include <iomanip>
+#include <cstring>
 
 using namespace std;
 
