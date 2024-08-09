@@ -7,9 +7,14 @@ using namespace std;
 struct Alu
 {
     void Add(Registers&);
-    void Sub(bitset<8>,bitset<8>);
-    void Mul(bitset<8>,bitset<8>);
-    void Div(bitset<8>,bitset<8>);
+    void AddC(Registers&);
+    void And(Registers&);
+    void Cmp(Registers&);
+    void Xor(Registers&);
+    void Or(Registers&);
+    void Clr(Registers&);
+    void Decr(Registers&);
+    void Incr(Registers&);
 };
 
 

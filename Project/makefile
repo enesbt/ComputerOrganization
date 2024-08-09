@@ -6,8 +6,9 @@ derle:
 	g++ -I ./include/ -o ./lib/Commands.o -c ./src/Commands.cpp
 	g++ -I ./include/ -o ./lib/Alu.o -c ./src/Alu.cpp
 	g++ -I ./include/ -o ./lib/CommandCycle.o -c ./src/CommandCycle.cpp
+	g++ -I ./include/ -o ./lib/Cpu.o -c ./src/Cpu.cpp
 
-	g++ -I ./include/ -o ./bin/test  ./lib/File.o ./lib/Registers.o ./lib/Commands.o ./lib/Alu.o ./lib/CommandCycle.o  ./src/test.cpp
+	g++ -I ./include/ -o ./bin/test  ./lib/File.o ./lib/Registers.o ./lib/Commands.o ./lib/Alu.o ./lib/CommandCycle.o ./lib/Cpu.o  ./src/test.cpp
 	
 calistir:
 	./bin/test

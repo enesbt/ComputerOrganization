@@ -21,6 +21,17 @@ struct CommmandCycle
     void Fetch(Registers&); // PC registeri degeri AR registerine atanir.Komut registerine komut atanir.PC degeri artirilir.
     void Decode(Registers&); // komut isleme verisi alma. 1byte lik DOGAL komutlar bu safhaya girmez.
 
+    
+    void Dolayli(Registers&,string);
+    void DolayliSon(Registers&,string);
+    void Direkt(Registers&,string);
+    void DirektSon(Registers&,string);
+    void Ivedi(Registers&,string);
+    void IvediSon(Registers&,string);
+    void Dogal(Registers&,string);
+    void DogalSon(Registers&,string);
+
+
     // ADD
     void IvediAdd(Registers&,Alu&);
     void DirektAdd(Registers&,Alu&);
@@ -29,7 +40,7 @@ struct CommmandCycle
     void IvediAddC(Registers&,Alu&);
     void DirektAddC(Registers&,Alu&);
     void DolayliAddC(Registers&,Alu&);
-    // AND
+    // AND 
     void IvediAnd(Registers&,Alu&);
     void DirektAnd(Registers&,Alu&);
     void DolayliAnd(Registers&,Alu&);
@@ -74,9 +85,9 @@ struct CommmandCycle
     void DogalDecr(Registers&,Alu&);
     // INCR
     void DogalIncr(Registers&,Alu&);
-    // CLC
+    // CLC elde bitini sifirlar
     void DogalClc(Registers&,Alu&);
-    // STC
+    // STC elde bitini 1 yapar
     void DogalStc(Registers&,Alu&);
     
     
