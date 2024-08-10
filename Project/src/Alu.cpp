@@ -38,7 +38,8 @@ void Alu::AddC(Registers& registers)
         result[i] = bit_a ^ bit_b ^ carry;
         //elde biti hesaplanmasi
         carry = (bit_a & bit_b) | (carry & (bit_a ^ bit_b));
-        registers.setCCR(carry);
+
+        registers.updateCarry(carry);
         //cout<<"Cary: "<<carry<<endl;
         //cout << "Carry Register Degeri:  " << registers.getCCR() << endl;
     }

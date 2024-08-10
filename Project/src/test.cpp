@@ -13,13 +13,7 @@ int main()
 
     Cpu *cpu = new Cpu(file);
     cpu->StartDecodeCode();
-
-    
-
-
-    
-
-
+                         
 
     return 0;
 }

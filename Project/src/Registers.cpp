@@ -5,8 +5,9 @@ Registers::Registers()
 {
     this->AR = nullptr;
     this->PC = nullptr;
-    this->SP = nullptr;
-    this->CCR = bitset<8>("00000001");
+    this->SP = nullptr; 
+    // CCR=> 000[Kesme][Tasma][Isaret][Sıfır][Elde]
+    this->CCR = bitset<8>("00000000");
     this->ACH = bitset<8>("00000000");
     this->ACL = bitset<8>("00000000");
 
@@ -17,6 +18,27 @@ Registers::~Registers()
     delete this->AR;
     delete this->PC;
     delete this->SP;
+}
+
+void Registers::updateCarry(bool carry)
+{
+    this->CCR[0] = carry;
+}
+void Registers::updateZero(bool zero)
+{
+    this->CCR[1] = zero;
+}
+void Registers::updateSign(bool sign)
+{
+    this->CCR[2] = sign;
+}
+void Registers::updateOverflow(bool overflow)
+{
+    this->CCR[3] = overflow;
+}
+void Registers::updateInterception(bool interception)
+{
+    this->CCR[4] = interception;
 }
 
 void Registers::setTRH1(bitset<8> TRH1)

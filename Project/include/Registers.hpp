@@ -38,6 +38,12 @@ struct Registers
         void setTRH2(bitset<8>);
         void setTRL1(bitset<8>);
         void setTRL2(bitset<8>);
+        // CCR FLAG UPDATE
+        void updateCarry(bool);
+        void updateZero(bool);
+        void updateSign(bool);
+        void updateOverflow(bool);
+        void updateInterception(bool);
         
 
 
