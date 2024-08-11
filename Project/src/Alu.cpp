@@ -45,6 +45,7 @@ void Alu::AddC(Registers& registers)
     }
     registers.setACL(result);
     result = 0;
+    carry = registers.getCCR()[0];
     for (size_t i = 0; i < 8; ++i) 
     {
         bool bit_a = registers.getACH()[i];
