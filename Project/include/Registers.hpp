@@ -1,6 +1,6 @@
 #ifndef REGISTERS_HPP
 #define REGISTERS_HPP
-#include<bitset>
+#include<bitset>  
 #include<iostream>
 using namespace std;
 
