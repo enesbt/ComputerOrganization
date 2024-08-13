@@ -5,7 +5,7 @@
 using namespace std;
 
 struct Registers
-{
+{ 
     private:
         uint8_t *AR; // address register
         uint8_t *PC; // program counter
